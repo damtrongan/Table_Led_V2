@@ -1,0 +1,61 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 0.5fr 1.5fr;
+  grid-auto-rows: auto;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  align-content: center;
+  grid-template-areas:
+    "header"
+    "body";
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  position: relative;
+}
+
+.header {
+  display: grid;
+  grid-template-columns: 0.6fr 1.8fr 0.6fr;
+  grid-template-rows: 0.5fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "logo display_infor time_date";
+  grid-area: header;
+  /* height: 150px; */
+}
+
+.logo {
+  grid-area: logo;
+}
+#logo_image {
+  padding-top: 30px;
+  width: 90%;
+}
+
+.display_infor {
+  grid-area: display_infor;
+}
+
+.time_date {
+  grid-area: time_date;
+}
+
+.body {
+  display: grid;
+  grid-area: body;
+}
+
+table,
+th,
+td {
+  border: 1px solid rgb(255, 255, 255);
+  border-collapse: collapse;
+}
+
+html, body , .container {
+  height: 100%;
+  margin: 0;
+}

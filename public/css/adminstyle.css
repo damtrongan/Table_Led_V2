@@ -1,0 +1,79 @@
+.container {
+    display: grid; 
+    grid-auto-rows: 1fr 1fr 1fr; 
+    grid-template-columns: 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 0px 0px; 
+    grid-template-areas: 
+      "admin_input_table"; 
+}
+
+.admin_input_table {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 0.3fr 2.5fr 0.4fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "name_table"
+        "admin_form"
+        "btn";
+    grid-area: admin_input_table;
+}
+
+.name_table {
+    grid-area: name_table;
+    text-align: center;
+}
+
+#admin_form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0px 0px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        ". .";
+    grid-area: admin_form;
+}
+
+.form-control {
+    margin: 0.2rem 0;
+    padding: 0px 20px 0px 20px;
+}
+
+.form-control label,
+.form-control input,
+.form-control textarea {
+    display: block;
+    width: 100%;
+    margin-bottom: 0.25rem;
+}
+
+.form-control input,
+.form-control textarea {
+    border: 1px solid #a1a1a1;
+    font: inherit;
+    border-radius: 2px;
+}
+
+.form-control input:focus,
+.form-control textarea:focus {
+    outline-color: #00695c;
+}
+.btn{
+    grid-area: btn;
+    background-color: #00695c;
+    color: #ffffff;
+    margin: auto;
+    width: 200px;
+    height: 50px;
+}
+.btn:hover{
+    grid-area: btn;
+    background-color: #222b2a;
+    color: #ffffff;
+    margin: auto;
+    width: 200px;
+    height: 50px;
+}

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>DataTable</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo">
+        <img id="logo_image" src="/logo/boat.jpg" alt="" srcset="">
+      </div> 
+      <div class="display_infor">
+        <h2>
+          <%= infors.name_display %>
+        </h2>
+      </div>
+      <div class="time_date">
+        <h3 id="time_display"></h3>
+        <h3 id="date_display"></h3>
+      </div>
+    </div>
+
+    <div class="body">
+      <table id="table1" class="table-refresh">
+        <tr class="name_station">
+          <th>Parameter</th>
+          <th>Station 1</th>
+          <th>Station 2</th>
+          <th>Station 3</th>
+          <th>Unit</th>
+        </tr>
+        <tr class="parameter_1">
+          <th>pH</th>
+          <td>
+            <%= data.station0.pH.value %>
+          </td>
+          <td>
+            <%= data.station1.pH.value %>
+          </td>
+          <td>
+            <%= data.station2.pH.value %>
+          </td>
+          <td>
+            <%= data.station0.pH.unit %>
+          </td>
+        </tr>
+        <tr class="parameter_2">
+          <th>Temp</th>
+          <td>
+            <%= data.station0.Temp.value %>
+          </td>
+          <td>
+            <%= data.station1.Temp.value %>
+          </td>
+          <td>
+            <%= data.station2.Temp.value %>
+          </td>
+          <td>*C</td>
+        </tr>
+        <tr class="parameter_3">
+          <th>TSS</th>
+          <td>50</td>
+          <td>60</td>
+          <td>70</td>
+          <td>mg/L</td>
+        </tr>
+        <tr class="parameter_4">
+          <th>COD</th>
+          <td>50</td>
+          <td>60</td>
+          <td>70</td>
+          <td>mg/L</td>
+        </tr>
+        <tr class="parameter_5">
+          <th>NH4</th>
+          <td>2</td>
+          <td>6</td>
+          <td>7</td>
+          <td>mg/L</td>
+        </tr>
+        <tr class="parameter_6">
+          <th>Flow IN</th>
+          <td>50</td>
+          <td>60</td>
+          <td>70</td>
+          <td>m3/h</td>
+        </tr>
+        <tr class="parameter_7">
+          <th>Flow OUT</th>
+          <td>50</td>
+          <td>60</td>
+          <td>70</td>
+          <td>mg/L</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <script src="main.js"></script>
+</body>
+
+</html>
