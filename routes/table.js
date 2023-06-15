@@ -50,19 +50,7 @@ const pathFolderRead = nameFolderTable1s.map((nameFolder) => {
 //     console.log(err);
 //   });
 
-// var p = "D:/02_Code/03_Table_Led_V2/data/test.json";
-// var a = true;
-// function readFileJSON(p){
-//   fs.readFile(p,'utf8', (err, fileContent) => {
-//     if(err) {
-//       fileContent = [];
-//       readFileJSON(fileContent);
-//     }else {
-//       console.log(fileContent);
-//     }
-//   })
-// };
-// readFileJSON(p);
+//   
 
 
 
