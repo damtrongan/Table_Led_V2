@@ -1,38 +1,38 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
-const Ftp = require("ftp");
-const moment = require('moment');
+const FTP = require("ftp");
+const moment = require("moment");
 
-var remoteServer = {
+var ftpServer = {
   host: "27.118.28.235",
   user: "testftp",
   password: "testftp@123",
 };
-const remotePath = "/An/MocChau/Tram1/2023/06/16";
+const remotePath = "/An/MocChau/Tram1";
 
-function readData (serverFTP, mainPath){
-  return new Promise((resolve, reject) => {
-    const client = new Ftp();
+var client = new FTP();
 
-    //Connect to the FTP Server
-    client.connect(serverFTP);
+client.connect(ftpServer);
+client.on("ready", () => {
+  console.log("FTP Conected");
 
-    client.on('ready', () => {
-      console.log("FTP connected");
-      
-      client.list(mainPath, (errs, files) => 
-      {
-        if(errs) {
-          reject(errs);  
-        }
-        resolve(console.log(files));
-      })
-    })
-  })
-}
-
-console.log(readData(remoteServer, remotePath));
+  function readToFile(remotePath) {
+    client.list(remotePath, (err, lists) => {
+      if (err) {
+        console.log(err);
+      }
+      lists = lists.slice(-1);
+      if (lists[0].type === "d") {
+        //console.log(`${remotePath}/${lists[0].name}`);
+        readToFile(`${remotePath}/${lists[0].name}`);
+      } else {
+        console.log(`${remotePath}/${lists[0].name}`);
+      }
+    });
+  }
+  readToFile(remotePath);
+});
 
 router.get("/", (req, res, next) => {
   res.render("../views/admin.ejs", {});
