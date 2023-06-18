@@ -9,14 +9,12 @@ app.set("view engine", "ejs");
 app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false }));
-//app.use(express.static(__dirname + "/public"));
-
-// Read file
+app.use(express.static(__dirname + "/public"));
 
 //Render UI
-//app.use(tableRoutes);
-app.use("/admin", adminRoutes);
+app.use(tableRoutes);
+//app.use("/admin", adminRoutes);
 
 app.listen(PORT, () => {
-  console.log(`server started on port ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
 });

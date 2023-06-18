@@ -1,76 +1,62 @@
-// const express = require("express");
-// const router = express.Router();
-// const path = require("path");
-// const fs = require("fs/promises");
-// const fs1 = require("fs");
-// const configs = require("../data/config").configs;
+const express = require("express");
+const router = express.Router();
+const path = require("path");
+const fs = require("fs");
+const { rejects } = require("assert");
+const configs = require("../data/config").configs;
 
-// const namefolderTable1s = configs.names_folder_table1;
-// const pathFolderTable1s = namefolderTable1s.map((folderTable1) => {
-//   return configs.dir_readFile + "/" + folderTable1;
-// });
+const main_Folder = configs.dir_readFile;
+const nameFolderTable1s = configs.names_folder_table1;
+const nameFolderTable2s = configs.names_folder_table2;
 
-// const getSubPath = (pathReadFolder) => {
-//   subPaths = fs1.readdirSync(pathReadFolder).map((subNameFolder) => {
-//     return path.join(pathReadFolder, subNameFolder);
-//   });
-//   return (subPaths = subPaths[subPaths.length - 1]);
-// };
+const pathFolderRead = nameFolderTable1s.map((nameFolder) => {
+  return `${main_Folder}/${nameFolder}`;
+});
+//console.log(pathFolderRead);
+/* 
+  IN:
+  + main_folder cần đọc
+  + Mảng tên folder cần đọc
 
-// const getData = (pathReadFolder) => {
-//   let parameterOut = {};
-//   yearPath = getSubPath(pathReadFolder);
-//   monthPath = getSubPath(yearPath);
-//   dayPath = getSubPath(monthPath);
-//   dataPath = getSubPath(dayPath);
-//   data = fs1
-//     .readFileSync(dataPath, {
-//       encoding: "utf8",
-//     })
-//     .split("\n")
-//     .forEach((line) => {
-//       var slicesArray = line.split("\t");
-//       parameterOut[slicesArray[0]] = {
-//         value: slicesArray[1],
-//         unit: slicesArray[2],
-//         time: slicesArray[3],
-//         status: slicesArray[4],
-//       };
-//     });
-//   return parameterOut;
-// };
+  OUT: 
+  + Đọc ra file mới nhất trong đó
+*/
 
-// /**
-//  * Setup all data
-//  * */
-// var allData = {};
+function getNewestFile(pathReadFoler) {
+  return new Promise((resolve, rejects) => {
+    fs.readdir(pathReadFoler, {withFileTypes : true}, (err, files) => {
+      pathRead = '';
+      if (err) rejects(err);
+      else {
+        files = files.sort((a, b) => {
+          return b.name - a.name;
+        });
+        if(files[0].isDirectory){
+          getNewestFile(`${pathReadFoler}/${files[0].name}`)
+        }else{
+          return ( pathRead =`${pathReadFoler}/${files[0].name}`);
+        }
+        resolve(pathRead);
+      }
+    });
+  });
+}
 
-// function getAllData(pathFolderTable1s) {
-//   allData.station0 = getData(pathFolderTable1s[0]);
-//   allData.station1 = getData(pathFolderTable1s[1]);
-//   allData.station2 = getData(pathFolderTable1s[2]);
-// }
 
-// function renderPage(req, res, next) {
-//   getAllData(pathFolderTable1s);
-//   res.render("../views/table.ejs", {
-//     infors: configs,
-//     data: allData,
-//   });
-// }
-// function renderPage2(req, res, next) {
-//   getAllData(pathFolderTable1s);
-//   res.render("../views/table2.ejs", {
-//     infors: configs,
-//     data: allData,
-//   });
-// }
+getNewestFile(pathFolderRead[0])
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
-// router.get("/", renderPage);
-// router.get("/table2", renderPage2);
+function renderPage(req, res, next) {
+  res.render("../views/table.ejs", {
+    infors: configs,
+  });
+}
 
-// /* router.get("/data", (req, res, next) => {
-//   res.send(JSON.stringify(allData));
-// }); */
+router.get("/", renderPage);
 
-// module.exports = router;
+module.exports = router;

@@ -24,8 +24,4 @@ client.on("error", (err) => {
   console.error("FTP connection error:", err);
 });
 
-app.use("/", (a, b, c) => {
-  b.send("<h1>Hello</h1>");
-});
-
 app.listen(3000);
