@@ -1,66 +1,67 @@
-{
-   "name_company": "XXX JOINT STOCK COMPANY",
-   "name_display": "TABLE QUALITY MONITORING PARAMETER",
-   "num_tables": 2,
-   "infor_table_1": {
-      "nameTable": "Water Staion",
-      "numb_station": 3,
-      "name_station_1": "Staion 1",
-      "name_station_2": "Staion 2",
-      "name_station_3": "Staion 3",
-      "num_parameter": 7,
-      "name_parameter": [
-         "pH",
-         "Temp",
-         "TSS",
-         "COD",
-         "NH4",
-         "Flow_IN",
-         "Flow_OUT"
+
+   {
+      "name_company": "XXX JOINT STOCK COMPANY",
+      "name_display": "TABLE QUALITY MONITORING PARAMETER",
+      "num_tables": 2,
+      "infor_table_1": {
+         "nameTable": "Water Staion",
+         "numb_station": 3,
+         "name_station_1": "Staion 1",
+         "name_station_2": "Staion 2",
+         "name_station_3": "Staion 3",
+         "num_parameter": 7,
+         "name_parameter": [
+            "pH",
+            "Temp",
+            "TSS",
+            "COD",
+            "NH4",
+            "Flow_IN",
+            "Flow_OUT"
+         ],
+         "unit_parameters": [
+            "-",
+            "oC",
+            "mg/L",
+            "mg/L",
+            "mg/L",
+            "mg/L",
+            "mg/L"
+         ]
+      },
+      "infor_table_2": {
+         "nameTable": "Air Staion",
+         "numb_station": 3,
+         "name_station_1": "Staion 4",
+         "name_station_2": "Staion 5",
+         "num_parameter": 7,
+         "name_parameter": [
+            "PM",
+            "Temp",
+            "P",
+            "Flow",
+            "CO",
+            "NO",
+            "HF"
+         ],
+         "unit_parameters": [
+            "mg/m3",
+            "mg/m3",
+            "mg/m3",
+            "m3/h",
+            "mg/m3",
+            "mg/m3",
+            "mg/m3"
+         ]
+      },
+      "dir_readFile": "D:/02_Code/02_Table_Led_BAK/fake_data",
+      "names_folder_table1": [
+         "station_W1",
+         "station_W2",
+         "station_W3"
       ],
-      "unit_parameters": [
-         "-",
-         "oC",
-         "mg/L",
-         "mg/L",
-         "mg/L",
-         "mg/L",
-         "mg/L"
+      "names_folder_table2": [
+         "station_A1",
+         "station_A2"
       ]
-   },
-   "infor_table_2": {
-      "nameTable": "Air Staion",
-      "numb_station": 3,
-      "name_station_1": "Staion 4",
-      "name_station_2": "Staion 5",
-      "num_parameter": 7,
-      "name_parameter": [
-         "PM",
-         "Temp",
-         "P",
-         "Flow",
-         "CO",
-         "NO",
-         "HF"
-      ],
-      "unit_parameters": [
-         "mg/m3",
-         "mg/m3",
-         "mg/m3",
-         "m3/h",
-         "mg/m3",
-         "mg/m3",
-         "mg/m3"
-      ]
-   },
-   "dir_readFile": "D:/02_Code/02_Table_Led_BAK/fake_data",
-   "names_folder_table1": [
-      "station_W1",
-      "station_W2",
-      "station_W3"
-   ],
-   "names_folder_table2": [
-      "station_A1",
-      "station_A2"
-   ]
-}
+   }
