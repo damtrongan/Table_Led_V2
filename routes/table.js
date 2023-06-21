@@ -10,8 +10,9 @@ const nameFolderTable1s = configs.names_folder_table1;
 const nameFolderTable2s = configs.names_folder_table2;
 
 const pathFolderRead = nameFolderTable1s.map((nameFolder) => {
-  return `${main_Folder}/${nameFolder}`;
+  return path.join(main_Folder, nameFolder);
 });
+
 //console.log(pathFolderRead);
 /* 
   IN:
@@ -22,26 +23,26 @@ const pathFolderRead = nameFolderTable1s.map((nameFolder) => {
   + Đọc ra file mới nhất trong đó
 */
 
-function getNewestFile(pathReadFoler) {
+function getNewestFile(pathReadFolder) {
   return new Promise((resolve, rejects) => {
-    fs.readdir(pathReadFoler, {withFileTypes : true}, (err, files) => {
-      pathRead = '';
+    var newestPath = '';
+    fs.readdir(pathReadFolder, { withFileTypes: true }, (err, folders) => {
       if (err) rejects(err);
       else {
-        files = files.sort((a, b) => {
+        var newestFolder = folders.sort((a, b) => {
           return b.name - a.name;
-        });
-        if(files[0].isDirectory){
-          getNewestFile(`${pathReadFoler}/${files[0].name}`)
-        }else{
-          return ( pathRead =`${pathReadFoler}/${files[0].name}`);
+        })[0];
+
+        if (newestFolder.isFile == false) {
+          newestPath = path.join(pathReadFolder, newestFolder.name);
+          getNewestFile(newestPath);
+        } else{
+          resolve(newestPath = path.join(pathReadFolder, newestFolder.name))
         }
-        resolve(pathRead);
       }
     });
   });
 }
-
 
 getNewestFile(pathFolderRead[0])
   .then((result) => {
