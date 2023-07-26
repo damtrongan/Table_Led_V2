@@ -1,85 +1,49 @@
 const express = require("express");
 const router = express.Router();
+const configs = require("../data/config.json");
 const path = require("path");
 const fs = require("fs");
-const configs = require("../data/config").configs;
 
-const main_Folder = configs.dir_readFile;
-const nameFolderTable1s = configs.names_folder_table1;
-const nameFolderTable2s = configs.names_folder_table2;
+//
+const mainPath = configs.dir_readFile;
+const stationTable1 = configs.names_folder_table1;
+const stationTable2 = configs.names_folder_table2;
 
-const pathFolderRead = nameFolderTable1s.map((nameFolder) => {
-  return `${main_Folder}/${nameFolder}`;
-});
-
-//console.log(pathFolderRead);
-/* 
-  IN:
-  + main_folder cần đọc
-  + Mảng tên folder cần đọc
-
-  OUT: 
-  + Đọc ra file mới nhất trong đó
-*/
-
-// function getNewestFile(pathReadFoler) {
-//   return new Promise((resolve, rejects) => {
-//     fs.readdir(pathReadFoler, {withFileTypes : true}, (err, files) => {
-//       pathRead = '';
-//       if (err) rejects(err);
-//       else {
-//         files = files.sort((a, b) => {
-//           return b.name - a.name;
-//         });
-//         if(files[0].isDirectory){
-//           getNewestFile(`${pathReadFoler}/${files[0].name}`)
-//         }else{
-//           return ( pathRead =`${pathReadFoler}/${files[0].name}`);
-//         }
-//         resolve(pathRead);
-//       }
-//     });
-//   });
-// }
-
-// getNewestFile(pathFolderRead[0])
-//   .then((result) => {
-//     console.log(result);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-//   
-
-
-
-// const getProductsFromFile = (cb) => {
-//   fs.readFile(p, (err, fileContent) => {
-//     if (err) {
-//       cb([]);
-//     } else {
-//       cb(JSON.parse(fileContent));
-//     }
-//   });
-// };
-// var AN = { name: "an" , age : 17};
-
-// getProductsFromFile(test => {
-//   console.log(test);
-// });
-// getProductsFromFile(AN);
-
-var product1 = {
-  name : "an",
-  age : "123",
+function getPathRead(mainPath, nameGroupStation) {
+  let path = [];
+  for (const name of nameGroupStation) {
+    path.push(`${mainPath}/${name}`);
+  }
+  return path;
 }
-var product2 = {
-  name : "trang",
-  age : "123",
+
+// Mảng các path của các trạm cần đọc
+const pathTable1 = getPathRead(mainPath, stationTable1);
+const pathTable2 = getPathRead(mainPath, stationTable2);
+
+var pathRead;
+function processPath(path, folders) {
+  var newestFolder = folders[folders.length - 1];
+  //console.log(newestFolder);
+  if (newestFolder.isDirectory()) {
+    readNewestFileFromPath(`${path}/${newestFolder.name}`);
+  } else {
+    return (`${path}/${newestFolder.name}`);
+  }
 }
-var products = [product1, product2];
-console.log([...products]);
+
+function readNewestFileFromPath(path) {
+  var pathRead = fs.readdir(path, { withFileTypes: true }, (err, folders) => {
+    if (err) console.log(err);
+    else {
+      processPath(path,folders);
+    }
+  });
+  //console.log(pathRead);
+}
+//var dirPath = fs.readdirSync(pathTable1[0])
+//console.log(pathTable1[0]);
+readNewestFileFromPath(pathTable1[0]);
 
 function renderPage(req, res, next) {
   res.render("../views/table.ejs", {
