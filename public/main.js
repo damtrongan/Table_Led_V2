@@ -24,13 +24,13 @@ function checkTime(i) {
 }
 startTime();
 
-setTimeout(() => {
-  if (window.location.pathname === '/table2') {
-    window.location.href = '/';
-  } else {
-    window.location.href = '/table2';
-  }
-}, 5000);
+// setTimeout(() => {
+//   if (window.location.pathname === '/table2') {
+//     window.location.href = '/';
+//   } else {
+//     window.location.href = '/table2';
+//   }
+// }, 5000);
 
 /* let station0;
 fetch("/data")npm

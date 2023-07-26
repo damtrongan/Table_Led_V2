@@ -1,40 +1,48 @@
-"use strict";
-const express = require("express");
-const router = express.Router();
-const Ftp = require("ftp");
-const moment = require('moment');
+// "use strict";
+// const express = require("express");
+// const router = express.Router();
+// const Ftp = require("ftp");
+// const moment = require("moment");
 
-var remoteServer = {
-  host: "27.118.28.235",
-  user: "testftp",
-  password: "testftp@123",
-};
-const remotePath = "/An/MocChau/Tram1/2023/06/16";
+// var remoteServer = {
+//   host: "27.118.28.235",
+//   user: "testftp",
+//   password: "testftp@123",
+// };
+// const remotePath = "/An/MocChau/Tram1/2023/06/16";
 
-function readData (serverFTP, mainPath){
-  return new Promise((resolve, reject) => {
-    const client = new Ftp();
+// function readData(serverFTP, mainPath) {
+//   return new Promise((resolve, reject) => {
+//     const client = new Ftp();
 
-    //Connect to the FTP Server
-    client.connect(serverFTP);
+//     //Connect to the FTP Server
+//     client.connect(serverFTP);
 
-    client.on('ready', () => {
-      console.log("FTP connected");
-      
-      client.list(mainPath, (errs, files) => 
-      {
-        if(errs) {
-          reject(errs);  
-        }
-        resolve(console.log(files));
-      })
-    })
-  })
-}
+//     //When connection ready
+//     client.on("ready", () => {
+//       console.log("FTP connected");
 
-console.log(readData(remoteServer, remotePath));
+//       function getIntoFolder(clientFtp, mainPath) {
+//         clientFtp.list(mainPath, (errs, files) => {
+//           if (errs) {
+//             reject(errs);
+//           }
+//           var file = files.slice(-1);
+//           if (file[0].type === "d") {
+//             getIntoFolder(`${mainPath}/${file[0].name}`);
+//           } else {
+//             return `${mainPath}/${file[0].name}`;
+//           }
+//         });
+//         getIntoFolder(client, mainPath);
+//       }
+//     });
+//   });
+// }
 
-router.get("/", (req, res, next) => {
-  res.render("../views/admin.ejs", {});
-});
-module.exports = router;
+// console.log(readData(remoteServer, remotePath));
+
+// router.get("/", (req, res, next) => {
+//   res.render("../views/admin.ejs", {});
+// });
+// module.exports = router;
