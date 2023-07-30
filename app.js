@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.static(__dirname + "/public"));
 
 //Render UI
-app.use(tableRoutes);
+app.use("/",tableRoutes);
 //app.use("/admin", adminRoutes);
 
 

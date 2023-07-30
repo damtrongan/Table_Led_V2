@@ -24,6 +24,9 @@ function checkTime(i) {
 }
 startTime();
 
+// fetch("localhost:3000/data").then((data) => {
+//   console.log(data);
+// });
 // setTimeout(() => {
 //   if (window.location.pathname === '/table2') {
 //     window.location.href = '/';

@@ -1,14 +1,10 @@
 const express = require("express");
 const router = express.Router();
-
-const path = require("path");
 const fs = require("fs").promises;
-// const fs = require("fs");
-// const readline = require('readline');
+
 const configs = require("../data/config.json");
 
 const mainPath = configs.dir_readFile;
-
 const pathTable1 = configs.names_folder_table1.map((nameFolder) => {
   return `${mainPath}/${nameFolder}`;
 });
@@ -22,75 +18,89 @@ async function getNewestPath(path) {
   return `${path}/${folder}`;
 }
 
-async function readNewestFilePath(paths) {
-  let contents = {};
-  
-  for (const path of paths) {
-    const pathYear = await getNewestPath(path);
-    const pathMonth = await getNewestPath(pathYear);
-    const pathDay = await getNewestPath(pathMonth);
-    const pathFile = await getNewestPath(pathDay);
-    const data = await fs.readFile(pathFile, "utf8");
-    const spliceData = data.split("\n").forEach((line) => {
-      let parameterOut = {};
-      var slicesArray = line.split("\t");
-      parameterOut[slicesArray[0]] = {
+async function readNewestFilePath(path, nameDisplay) {
+  let parameterOut = {
+    nameStation: nameDisplay,
+    params : []
+  };
+  const pathYear = await getNewestPath(path);
+  const pathMonth = await getNewestPath(pathYear);
+  const pathDay = await getNewestPath(pathMonth);
+  const pathFile = await getNewestPath(pathDay); // Path file text
+  const content = await fs.readFile(pathFile, "utf8"); // Data content file txt
+  const spliceData = content.split("\n"); //Bỏ ký tự /n và tách mỗi dòng thành 1 phần tử trong mảng
+
+  for (const line of spliceData) {
+    var slicesArray = line.split("\t");
+    //parameterOut[`para${spliceData.indexOf(line)+1}`] = line.split('\t')
+    parameterOut.params.push(
+      {
+        name: slicesArray[0],
         value: slicesArray[1],
         unit: slicesArray[2],
         time: slicesArray[3],
-        status: slicesArray[4],
-      };
-      return parameterOut
-    });
-    console.log(spliceData);
-    // const stationName = slices[slices.length-1];
-    //contents[stationName] = spliceData;
+        statuspara: slicesArray[4],
+      }
+    )
   }
-  return contents;
+  return parameterOut;
 }
 
-readNewestFilePath(pathTable1).then((contents) => {
-  console.log(contents);
-});
+//readNewestFilePath(pathTable1[0], configs.infor_table_1.name_station_1).then((data) => console.log(data));
 
-// const example = [
-//   'pH\t2.34\t\t20230509153700\t00\r\n' +
-//     'TSS\t65.61\tmg/L\t20230509153700\t00\r\n' +
-//     'COD\t75.68\tmg/L\t20230509153700\t00\r\n' +
-//     'Flow\t6.24\tm3/h\t20230509153700\t00\r\n' +
-//     'NH4\t8.21\tmg/L\t20230509153700\t00\r\n' +
-//     'Flow_IN\t298.29\tm3/h\t20230509153700\t00\r\n' +
-//     'Temp\t22.87\toC\t20230509153700\t00\r\n',
-//   'pH\t7.33\t\t20230509153800\t00\r\n' +
-//     'TSS\t6.93\tmg/L\t20230509153800\t00\r\n' +
-//     'COD\t62.98\tmg/L\t20230509153800\t00\r\n' +
-//     'Flow\t40.28\tm3/h\t20230509153800\t00\r\n' +
-//     'NH4\t6.46\tmg/L\t20230509153800\t00\r\n' +
-//     'Flow_IN\t64.98\tm3/h\t20230509153800\t00\r\n' +
-//     'Temp\t23.58\toC\t20230509153800\t00\r\n',
-//   'pH\t7.71\t\t20230509154000\t00\r\n' +
-//     'TSS\t30.92\tmg/L\t20230509154000\t00\r\n' +
-//     'COD\t31.53\tmg/L\t20230509154000\t00\r\n' +
-//     'Flow\t1.10\tm3/h\t20230509154000\t00\r\n' +
-//     'NH4\t1.65\tmg/L\t20230509154000\t00\r\n' +
-//     'Flow_IN\t0.00\tm3/h\t20230509154000\t02\r\n' +
-//     'Temp\t28.93\toC\t20230509154000\t00\r\n'
-// ];
+// async function sortDataCol(){
+//   const station = configs.infor_table_1;
+//   const valueCol0 = station.name_parameter;
+//   let   valueCol1 = [];
+//   const valueStas1 = await readNewestFilePath(pathTable1[0], station.name_station_1);
+//   const valueStas2 = await readNewestFilePath(pathTable1[1], station.name_station_2);
+//   const valueStas3 = await readNewestFilePath(pathTable1[2], station.name_station_3);
+//   for (let i = 0; i < valueCol0.length; i++){
+    
+//   }
 
-// function splitData(contents){
-//   contents.forEach(element => {
-//     element.split('\t')
-//     console.log(element);
-//   });
 // }
-// splitData(example)
 
-function renderPage(req, res, next) {
+async function renderPage1(req, res, next) {
+  const station = configs.infor_table_1;
+  const valueCol0 = station.name_parameter;
+  const valueCol1 = await readNewestFilePath(pathTable1[0], station.name_station_1);
+  const valueCol2 = await readNewestFilePath(pathTable1[1], station.name_station_2);
+  const valueCol3 = await readNewestFilePath(pathTable1[2], station.name_station_3);
   res.render("../views/table.ejs", {
     infors: configs,
+    col0 : valueCol0,
+    col1 : valueCol1,
+    col2 : valueCol2,
+    col3 : valueCol3,
+    inforTable1: configs.infor_table_1,
   });
+
+
 }
 
-router.get("/", renderPage);
+async function renderPage2(req, res, next) {
+  const station = configs.infor_table_2;
+  const valueCol0 = station.name_parameter;
+  const valueCol1 = await readNewestFilePath(pathTable2[0], station.name_station_1);
+  const valueCol2 = await readNewestFilePath(pathTable2[1], station.name_station_2);
+  console.log(valueCol0);
+  console.log(valueCol1);
+  res.render("../views/table2.ejs", {
+    infors: configs,
+    col0 : valueCol0,
+    col1 : valueCol1,
+    col2 : valueCol2,
+    inforTable1: configs.infor_table_1,
+  });
+
+  setTimeout(() =>{
+    res.redirect("/")
+  },3000)
+}
+
+router.get("/", renderPage1);
+router.get("/table2", renderPage2);
+
 
 module.exports = router;
