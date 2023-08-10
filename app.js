@@ -15,7 +15,7 @@ app.use(express.static(__dirname + "/public"));
 
 //Render UI
 app.use("/",tableRoutes);
-//app.use("/admin", adminRoutes);
+app.use("/admin", adminRoutes);
 
 
 app.listen(PORT, () => {

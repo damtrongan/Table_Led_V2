@@ -1,6 +1,7 @@
+"use strict";
 const ftp = require('ftp');
 
-async function getNewestPathOnFtp(host, port, username, password, remotePath) {
+async function getNewestPathOnFtp(config, remotePath) {
   return new Promise((resolve, reject) => {
     const client = new ftp();
 
@@ -20,12 +21,7 @@ async function getNewestPathOnFtp(host, port, username, password, remotePath) {
       reject(err);
     });
 
-    client.connect({
-      host,
-      port,
-      user: username,
-      password,
-    });
+    client.connect(config);
   });
 }
 

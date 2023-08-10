@@ -1,11 +1,10 @@
+"use strict";
 const express = require("express");
 const router = express.Router();
 const fs = require("fs").promises;
 const FTPClient = require("ftp");
 
 const configs = require("../data/config.json");
-const { resolve } = require("path");
-const { rejects } = require("assert");
 
 const mainPath = configs.dir_readFile;
 const pathTable1 = configs.names_folder_table1.map((nameFolder) => {
@@ -166,54 +165,5 @@ async function getFtpFileContent(config, remotePath) {
   });
 }
 
-// getFtpFileContent(ftpServer, remoteFilePath)
-//   .then((result) => {
-//     console.log(result);
-//     var data = [];
-//     data = result.split("\r");
-
-//     return data
-//   }).then(splitData => {
-//     console.log(splitData);
-//   })
-//   .catch((err) => {
-//     console.log(err);
-//   });
-
-async function getFolderPath(config, remotePath) {
-  return new Promise((resolve, reject) => {
-    const client = new FTPClient();
-    
-    async function  getNewestPath() {
-      client.list(remotePath, (err, list) => {
-        if (err) {
-          reject(err);
-        }
-        if (list) {
-          const lastElement = list.pop().name;
-          const newestPath = `${remotePath}/${lastElement}`;
-          resolve(newestPath);
-        } else {
-          reject("Don't have any folder here");
-        }
-      });
-    }
-    client.on("ready", () => {
-      const pathYear = getNewestPath();
-      return(pathYear)
-    });
-
-    client.on("error", (err) => {
-      client.end();
-      reject(err);
-    });
-
-    client.connect(config);
-  });
-}
-
-getFolderPath(ftpServer, remotePath).then((data) => {
-  console.log(data);
-});
 
 module.exports = router;
