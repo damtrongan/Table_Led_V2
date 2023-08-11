@@ -1,47 +1,34 @@
-"use strict";
+const { rejects } = require("assert");
 const express = require("express");
 const router = express.Router();
-const Ftp = require("ftp");
-const moment = require("moment");
+const fs = require("fs");
+const path = require("path");
 
-var remoteServer = {
-  host: "27.118.28.235",
-  user: "testftp",
-  password: "testftp@123",
-};
-const remotePath = "/An/MocChau/Tram1/2023/06/16";
+const p = path.join(
+  path.dirname(process.mainModule.filename),
+  "data",
+  "configtest.json"
+);
 
-function readData(serverFTP, mainPath) {
-  return new Promise((resolve, reject) => {
-    const client = new Ftp();
-
-    //Connect to the FTP Server
-    client.connect(serverFTP);
-
-    //When connection ready
-    client.on("ready", () => {
-      console.log("FTP connected");
-
-      function getIntoFolder(clientFtp, mainPath) {
-        clientFtp.list(mainPath, (errs, files) => {
-          if (errs) {
-            reject(errs);
-          }
-          var file = files.slice(-1);
-          if (file[0].type === "d") {
-            getIntoFolder(`${mainPath}/${file[0].name}`);
-          } else {
-            return `${mainPath}/${file[0].name}`;
-          }
-        });
-        getIntoFolder(client, mainPath);
-      }
+function getConfigFromFile(path) {
+  return new Promise((resolve, rejects) => {
+    fs.readFile(path, (err, config) => {
+      if (err) {
+        rejects(err);
+      } else resolve(JSON.parse(config));
     });
   });
 }
 
-
 router.get("/", (req, res, next) => {
-  res.render("../views/admin.ejs", {});
+  getConfigFromFile(p).then((data) => {
+    console.log(data);
+    res.render("../views/admin.ejs",
+    {
+      config : data
+    }
+    );
+  });
 });
+
 module.exports = router;
