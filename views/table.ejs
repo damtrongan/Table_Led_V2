@@ -1,82 +1,102 @@
 <%- include('./head.ejs') %>
 
-    <div class="body">
-      <table id="table1" class="table-refresh">
-        <tr class="name_station">
-          <th>Parameter</th>
-          <th><%= inforTable1.name_station_1 %></th>
-          <th><%= inforTable1.name_station_2 %></th>
-          <th><%= inforTable1.name_station_3 %></th>
-          <th>Unit</th>
-        </tr>
+  <div class="body">
+    <table id="table1" class="table-refresh">
+      <tr class="name_station">
+        <th>Parameter</th>
+        <th>
+          <%= inforTable1.name_station_1 %>
+        </th>
+        <th>
+          <%= inforTable1.name_station_2 %>
+        </th>
+        <th>
+          <%= inforTable1.name_station_3 %>
+        </th>
+        <th>Unit</th>
+      </tr>
 
-        <tr class="parameter_1">
-          <th><%= col0[0]  %></th>
-          <td>
-            <%= col1.params[0].value %>
-          </td>
-          <td>
-            <%= col2.params[0].value %>
-          </td>
-          <td>
-            <%= col3.params[0].value %>
-          </td>   
-          <td> 
-            <%= "-" %>
-          </td>
-        </tr>
-        <tr class="parameter_2">
-          <th><%= inforTable1.name_parameter[1] %></th>
-          <td>
-            <%= 00 %>
-          </td>
-          <td>
-            <%= 00 %>
-          </td>
-          <td>
-            <%= 00 %>
-          </td>
-          <td>*C</td>
-        </tr>
-        <tr class="parameter_3">
-          <th><%= inforTable1.name_parameter[2] %></th>
-          <td>50</td>
-          <td>60</td>
-          <td>70</td>
-          <td>mg/L</td>
-        </tr>
-        <tr class="parameter_4">
-          <th><%= inforTable1.name_parameter[3] %></th>
-          <td>50</td>
-          <td>60</td>
-          <td>70</td>
-          <td>mg/L</td>
-        </tr>
-        <tr class="parameter_5">
-          <th><%= inforTable1.name_parameter[4] %></th>
-          <td>2</td>
-          <td>6</td>
-          <td>7</td>
-          <td>mg/L</td>
-        </tr>
-        <tr class="parameter_6">
-          <th><%= inforTable1.name_parameter[5] %></th>
-          <td>50</td>
-          <td>60</td>
-          <td>70</td>
-          <td>m3/h</td>
-        </tr>
-        <tr class="parameter_7">
-          <th><%= inforTable1.name_parameter[6] %></th>
-          <td>50</td>
-          <td>60</td>
-          <td>70</td>
-          <td>mg/L</td>
-        </tr>
-      </table>
-    </div>
+      <tr class="parameter_1">
+        <th>
+          <%= col0[0] %>
+        </th>
+        <td>
+          <%= col1.params[0].value %>
+        </td>
+        <td>
+          <%= col2.params[0].value %>
+        </td>
+        <td>
+          <%= col3.params[0].value %>
+        </td>
+        <td>
+          <%= "-" %>
+        </td>
+      </tr>
+      <tr class="parameter_2">
+        <th>
+          <%= inforTable1.name_parameter[1] %>
+        </th>
+        <td>
+          <%= 00 %>
+        </td>
+        <td>
+          <%= 00 %>
+        </td>
+        <td>
+          <%= 00 %>
+        </td>
+        <td>*C</td>
+      </tr>
+      <tr class="parameter_3">
+        <th>
+          <%= inforTable1.name_parameter[2] %>
+        </th>
+        <td>50</td>
+        <td>60</td>
+        <td>70</td>
+        <td>mg/L</td>
+      </tr>
+      <tr class="parameter_4">
+        <th>
+          <%= inforTable1.name_parameter[3] %>
+        </th>
+        <td>50</td>
+        <td>60</td>
+        <td>70</td>
+        <td>mg/L</td>
+      </tr>
+      <tr class="parameter_5">
+        <th>
+          <%= inforTable1.name_parameter[4] %>
+        </th>
+        <td>2</td>
+        <td>6</td>
+        <td>7</td>
+        <td>mg/L</td>
+      </tr>
+      <tr class="parameter_6">
+        <th>
+          <%= inforTable1.name_parameter[5] %>
+        </th>
+        <td>50</td>
+        <td>60</td>
+        <td>70</td>
+        <td>m3/h</td>
+      </tr>
+      <tr class="parameter_7">
+        <th>
+          <%= inforTable1.name_parameter[6] %>
+        </th>
+        <td>50</td>
+        <td>60</td>
+        <td>70</td>
+        <td>mg/L</td>
+      </tr>
+    </table>
+  </div>
   </div>
   <script src="main.js"></script>
-</body>
+  </body>
 
-</html>
+  </html>

@@ -31,7 +31,6 @@ async function readNewestFilePath(path, nameDisplay) {
     const pathFile = await getNewestPath(pathDay); // Path file text
     const content = await fs.readFile(pathFile, "utf8"); // Data content file txt
     const spliceData = content.split("\n"); //Bỏ ký tự /n và tách mỗi dòng thành 1 phần tử trong mảng
-
     for (const line of spliceData) {
       var slicesArray = line.split("\t");
       //parameterOut[`para${spliceData.indexOf(line)+1}`] = line.split('\t')
@@ -43,6 +42,7 @@ async function readNewestFilePath(path, nameDisplay) {
         statuspara: slicesArray[4],
       });
     }
+    return parameterOut;
   } catch {
     (err) => console.log(err);
   }
@@ -51,10 +51,14 @@ async function readNewestFilePath(path, nameDisplay) {
 async function renderPage1(req, res, next) {
   const station = configs.infor_table_1;
   const valueCol0 = station.name_parameter;
+  console.log(pathTable1);
+
+  //Read file from folders for table 1
   const valueCol1 = await readNewestFilePath(
     pathTable1[0],
     station.name_station_1
   );
+  console.log(valueCol1);
   const valueCol2 = await readNewestFilePath(
     pathTable1[1],
     station.name_station_2
@@ -63,6 +67,7 @@ async function renderPage1(req, res, next) {
     pathTable1[2],
     station.name_station_3
   );
+
   res.render("../views/table.ejs", {
     infors: configs,
     col0: valueCol0,
@@ -89,14 +94,12 @@ async function renderPage2(req, res, next) {
     col0: valueCol0,
     col1: valueCol1,
     col2: valueCol2,
-    inforTable1: configs.infor_table_1,
+    inforTable2: configs.infor_table_2,
   });
 
-  setTimeout(() => {
-    res.redirect("/");
-  }, 3000);
 }
 
 router.get("/", renderPage1);
 router.get("/table2", renderPage2);
+
 module.exports = router;
