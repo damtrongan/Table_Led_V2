@@ -4,7 +4,7 @@ const app = express();
 
 const tableRoutes = require("./routes/table");
 const adminRoutes = require("./routes/admin");
-
+const ftpServer = require("./util/ftp");
 const PORT = process.env.PORT || 3000;
 
 app.set("view engine", "ejs");
