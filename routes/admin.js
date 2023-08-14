@@ -1,6 +1,6 @@
-const { rejects } = require("assert");
 const express = require("express");
 const router = express.Router();
+
 const fs = require("fs");
 const path = require("path");
 
@@ -30,5 +30,10 @@ router.get("/", (req, res, next) => {
     );
   });
 });
+
+router.post("/saveconfig", (req, res, next) => {
+  const config = req.body;
+  res.redirect("/")
+})
 
 module.exports = router;

@@ -1,45 +1,52 @@
-.container {
-    display: grid; 
-    grid-auto-rows: 1fr 1fr 1fr; 
-    grid-template-columns: 1fr; 
-    grid-template-rows: 1fr; 
-    gap: 0px 0px; 
-    grid-template-areas: 
-      "admin_input_table"; 
+* {
+    box-sizing: border-box;
 }
 
-.admin_input_table {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-template-rows: 0.3fr 2.5fr 0.4fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "name_table"
-        "admin_form"
-        "btn";
-    grid-area: admin_input_table;
+/* #admin_input_table {
+    display: block;
+} */
+
+.center {
+    margin: auto;
+    width: 50%;
+    /* border: 3px solid green; */
+    padding: 10px;
+    padding: 0px 20px 0px 20px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    padding: 10px;
+
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+
 }
 
 .name_table {
-    grid-area: name_table;
+    display: block;
     text-align: center;
 }
 
 #admin_form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr;
-    gap: 0px 0px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        ". .";
-    grid-area: admin_form;
+    display: block;
+    padding: 0px 20% 0px 20%;
+    
 }
-
+.detail-info {
+    border: solid green 3px;
+}
 .form-control {
     margin: 0.2rem 0;
-    padding: 0px 20px 0px 20px;
+}
+
+.form-control h3 {
+    text-align: center;
 }
 
 .form-control label,
@@ -61,19 +68,22 @@
 .form-control textarea:focus {
     outline-color: #00695c;
 }
-.btn{
+
+.btn {
+    display: block;
     grid-area: btn;
     background-color: #00695c;
     color: #ffffff;
-    margin: auto;
+    margin-top: 10px;
     width: 200px;
     height: 50px;
 }
-.btn:hover{
+
+.btn:hover {
     grid-area: btn;
     background-color: #222b2a;
     color: #ffffff;
-    margin: auto;
+    margin-top: 10px;
     width: 200px;
     height: 50px;
 }
