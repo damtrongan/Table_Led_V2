@@ -17,30 +17,46 @@
 
 .header {
   display: grid;
-  grid-template-columns: 0.6fr 1.8fr 0.6fr;
-  grid-template-rows: 0.5fr;
+  grid-template-columns: 0.6fr 2fr 0.4fr;
+  /* grid-template-rows: 0.5fr; */
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
     "logo display_infor time_date";
   grid-area: header;
-  /* height: 150px; */
+  
+
 }
 
 .logo {
   grid-area: logo;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-#logo_image {
+
+img {
+  max-width: 100%;
+  max-height: 90%;
+}
+
+/* #logo_image {
   padding-top: 30px;
   width: 90%;
-}
+} */
 
 .display_infor {
   grid-area: display_infor;
+  align-items:start;
 }
 
 .time_date {
   grid-area: time_date;
+  display:flex;
+  justify-content: center;
+  align-content: center;
+  flex-wrap: wrap;
+  color: cyan;
 }
 
 .body {
@@ -48,14 +64,22 @@
   grid-area: body;
 }
 
+
 table,
 th,
 td {
+  font-size: 20px;
   border: 1px solid rgb(255, 255, 255);
   border-collapse: collapse;
 }
 
-html, body , .container {
+th {
+  max-width: 60px;
+}
+
+html,
+body,
+.container {
   height: 100%;
   margin: 0;
 }

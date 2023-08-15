@@ -53,7 +53,7 @@
          "mg/m3"
       ]
    },
-   "dir_readFile": "D:/Project/00_Code/00_Table_Led/fake_data",
+   "dir_readFile": "D:/02_Code/02_Table_Led_BAK/fake_data",
    "names_folder_table1": [
       "station_W1",
       "station_W2",

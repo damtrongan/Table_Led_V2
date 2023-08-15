@@ -24,10 +24,10 @@
           <%= col1.params[0].value %>
         </td>
         <td>
-          <%= col2.params[0].value %>
+          <%= col2.params[0].value || col1.params[0].value%>
         </td>
         <td>
-          <%= col3.params[0].value %>
+          <%= col3.params[0].value || col1.params[0].value %>
         </td>
         <td>
           <%= "-" %>
@@ -38,7 +38,7 @@
           <%= inforTable1.name_parameter[1] %>
         </th>
         <td>
-          <%= 00 %>
+          <%= col1.params[0].value || 0 %>
         </td>
         <td>
           <%= 00 %>

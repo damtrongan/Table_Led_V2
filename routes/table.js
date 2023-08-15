@@ -51,7 +51,17 @@ async function readNewestFilePath(path, nameDisplay) {
 async function renderPage1(req, res, next) {
   const station = configs.infor_table_1;
   const valueCol0 = station.name_parameter;
-  console.log(pathTable1);
+
+  const DEFAULTVALUE = {
+    nameStation: "Station",
+    params: [{
+      name: "pH",
+      value: 7,
+      unit: "-",
+      time: 0,
+      statuspara: 0,
+    }],
+  };
 
   //Read file from folders for table 1
   const valueCol1 = await readNewestFilePath(
@@ -70,10 +80,10 @@ async function renderPage1(req, res, next) {
 
   res.render("../views/table.ejs", {
     infors: configs,
-    col0: valueCol0,
-    col1: valueCol1,
-    col2: valueCol2,
-    col3: valueCol3,
+    col0: valueCol0 || DEFAULTVALUE,
+    col1: valueCol1 || DEFAULTVALUE,
+    col2: valueCol2 || DEFAULTVALUE,
+    col3: valueCol3 || DEFAULTVALUE,
     inforTable1: configs.infor_table_1,
   });
 }
@@ -96,7 +106,6 @@ async function renderPage2(req, res, next) {
     col2: valueCol2,
     inforTable2: configs.infor_table_2,
   });
-
 }
 
 router.get("/", renderPage1);
