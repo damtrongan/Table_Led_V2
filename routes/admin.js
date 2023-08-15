@@ -7,14 +7,14 @@ const path = require("path");
 const p = path.join(
   path.dirname(process.mainModule.filename),
   "data",
-  "configtest.json"
+  "defaultconfig.json"
 );
 
 function getConfigFromFile(path) {
   return new Promise((resolve, rejects) => {
     fs.readFile(path, (err, config) => {
       if (err) {
-        rejects(err);
+        resolve(JSON.parse("./data/config.json"))
       } else resolve(JSON.parse(config));
     });
   });

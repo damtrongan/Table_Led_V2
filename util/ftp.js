@@ -1,19 +1,31 @@
 const ftp = require("ftp");
 
-const REMOTEFILEPATH =
-  "/An/MocChau/Tram1/2023/06/13/SL_TTMC_NUOTHT_20230613152500.txt";
-
-async function getNewestFolderOnFtp(serverConfig, remotePath) {
+async function getNewestFileContentOnFtp(serverConfig, remotePath) {
   return new Promise((resolve, reject) => {
     const client = new ftp();
-
     client.on("ready", () => {
       getNewestFolderRecursively(client, remotePath, (err, newestFolder) => {
-        client.end();
         if (err) {
           reject(err);
         } else {
-          resolve(newestFolder);
+          client.get(newestFolder, (err, stream) => {
+            if (err) {
+              client.end();
+              reject(err);
+              return;
+            }
+
+            let content = "";
+
+            stream.on("data", (chunk) => {
+              content += chunk;
+            });
+
+            stream.on("end", () => {
+              client.end();
+              resolve(content);
+            });
+          });
         }
       });
     });
@@ -32,16 +44,24 @@ function getNewestFolderRecursively(client, currentPath, callback) {
     if (err) {
       return callback(err);
     }
-    const newestFolder = files.pop()
+    const newestFolder = files.pop();
     const newPath = currentPath + "/" + newestFolder.name;
-    if(newestFolder.type != 'd'){
-      callback(null, null)
-    }else{
-      getNewestFolderRecursively(client, newPath);
+    //console.log(newPath);
+    if (newestFolder.type != "d") {
+      callback(null, newPath);
+    } else {
+      getNewestFolderRecursively(client, newPath, (err, newPath) => {
+        if (err) {
+          callback(err);
+        } else {
+          callback(null, newPath);
+        }
+      });
     }
-    
   });
 }
+
+
 
 // Example usage:
 async function main() {
@@ -52,14 +72,29 @@ async function main() {
     password: "testftp@123",
   };
   const REMOTEPATH = "/An/MocChau/Tram1";
-
+  let parameterOut = {
+    nameStation: REMOTEPATH.trim("/An/MocChau/"),
+    params: [],
+  };
   try {
-    const newestFolder = await getNewestFolderOnFtp(FTPSERVER, REMOTEPATH);
-    console.log("Newest folder:", newestFolder);
+    const contentFile = await getNewestFileContentOnFtp(FTPSERVER, REMOTEPATH);
+    const spliceData = contentFile.split("\n"); //Bỏ ký tự /n và tách mỗi dòng thành 1 phần tử trong mảng
+    for (const line of spliceData) {
+      var slicesArray = line.split("\t");
+      //parameterOut[`para${spliceData.indexOf(line)+1}`] = line.split('\t')
+      parameterOut.params.push({
+        name: slicesArray[0],
+        value: slicesArray[1],
+        unit: slicesArray[2],
+        time: slicesArray[3],
+        statuspara: slicesArray[4],
+      });
+    }
+    console.log(parameterOut);
   } catch (err) {
     console.error("Error:", err);
   }
 }
 
 // Run the async function
-main();
+//main();
