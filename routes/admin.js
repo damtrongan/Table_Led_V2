@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const fs = require("fs");
+const { get } = require("https");
 const path = require("path");
 
 const p = path.join(
@@ -14,26 +15,34 @@ function getConfigFromFile(path) {
   return new Promise((resolve, rejects) => {
     fs.readFile(path, (err, config) => {
       if (err) {
-        resolve(JSON.parse("./data/config.json"))
+        resolve(JSON.stringify("./data/config.json"));
       } else resolve(JSON.parse(config));
     });
   });
 }
 
-router.get("/", (req, res, next) => {
-  getConfigFromFile(p).then((data) => {
-    console.log(data);
-    res.render("../views/admin.ejs",
-    {
-      config : data
-    }
-    );
+async function saveFile(path, data){
+  return new Promise((resolve, rejects) => {
+    fs.writeFile(path, data ,(err) => {
+      if (err) {
+        resolve(JSON.parse("./data/defaultconfig.json"));
+      } else resolve(JSON.parse(defaultconfig));
+    });
+  });
+}
+
+router.get("/", async (req, res, next) => {
+  const data = await getConfigFromFile(p)
+  res.render("../views/admin.ejs", {
+    config: data,
   });
 });
 
-router.post("/saveconfig", (req, res, next) => {
+router.post("/saveconfig", async (req, res, next) => {
   const config = req.body;
-  res.redirect("/")
-})
+  await saveFile(p, JSON.stringify(config));
+  console.log(config);
+  res.redirect("/admin");
+});
 
 module.exports = router;

@@ -64,7 +64,7 @@ function getNewestFolderRecursively(client, currentPath, callback) {
 
 
 // Example usage:
-async function main() {
+async function getFTPFileContent(nameStation) {
   const FTPSERVER = {
     host: "27.118.28.235",
     port: 21,
@@ -73,7 +73,7 @@ async function main() {
   };
   const REMOTEPATH = "/An/MocChau/Tram1";
   let parameterOut = {
-    nameStation: REMOTEPATH.trim("/An/MocChau/"),
+    nameStation: nameStation,
     params: [],
   };
   try {
@@ -90,11 +90,12 @@ async function main() {
         statuspara: slicesArray[4],
       });
     }
-    console.log(parameterOut);
+    return parameterOut;
   } catch (err) {
     console.error("Error:", err);
   }
 }
 
+module.exports = {getFTPFileContent};
 // Run the async function
 //main();

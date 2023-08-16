@@ -55,8 +55,9 @@ img {
   display:flex;
   justify-content: center;
   align-content: center;
-  flex-wrap: wrap;
+  flex-wrap:wrap;
   color: cyan;
+  flex-direction: column;
 }
 
 .body {
