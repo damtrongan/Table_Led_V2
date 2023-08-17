@@ -2,15 +2,13 @@
     box-sizing: border-box;
 }
 
-/* #admin_input_table {
-    display: block;
-} */
+body{
+    background-color: bisque ;
 
+}
 .center {
     margin: auto;
-    width: 50%;
-    /* border: 3px solid green; */
-    padding: 10px;
+    width: 100%;
     padding: 0px 20px 0px 20px;
 }
 
@@ -18,56 +16,57 @@
     float: left;
     width: 50%;
     padding: 10px;
-
 }
 
 .row:after {
     content: "";
     display: table;
     clear: both;
-
 }
 
 .name_table {
     display: block;
     text-align: center;
 }
-
-#admin_form {
-    display: block;
-    padding: 0px 20% 0px 20%;
-    
-}
-.detail-info {
-    border: solid green 3px;
-}
-.form-control {
-    margin: 0.2rem 0;
-}
-
-.form-control h3 {
+h3 {
     text-align: center;
 }
 
-.form-control label,
-.form-control input,
-.form-control textarea {
+.form-control{
+    /* display: inline-block; */
+}
+
+.detail-info{
+    border-top: solid;
+}
+#input_table{
     display: block;
+    width: 90%;
+    margin: auto;
+/*     background-color:bisque */
+}
+.input-container{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+.input-container label{
+    flex: 1;
+    margin-right: 5px;
+}
+.input-container input{
+    flex: 2;
+}
+
+input[type=text], select, textarea {
     width: 100%;
-    margin-bottom: 0.25rem;
-}
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
 
-.form-control input,
-.form-control textarea {
-    border: 1px solid #a1a1a1;
-    font: inherit;
-    border-radius: 2px;
-}
 
-.form-control input:focus,
-.form-control textarea:focus {
-    outline-color: #00695c;
-}
 
 .btn {
     display: block;
