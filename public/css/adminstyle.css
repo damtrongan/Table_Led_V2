@@ -19,7 +19,7 @@ body{
 }
 
 .row:after {
-    content: "";
+    /* content: ""; */
     display: table;
     clear: both;
 }
@@ -31,9 +31,9 @@ body{
 h3 {
     text-align: center;
 }
-
-.form-control{
-    /* display: inline-block; */
+input#method_read{
+    width: 30px;
+    height: 30px;
 }
 
 .detail-info{
@@ -41,7 +41,7 @@ h3 {
 }
 #input_table{
     display: block;
-    width: 90%;
+    width: 100%;
     margin: auto;
 /*     background-color:bisque */
 }
@@ -69,8 +69,7 @@ input[type=text], select, textarea {
 
 
 .btn {
-    display: block;
-    grid-area: btn;
+    /* display: block; */
     background-color: #00695c;
     color: #ffffff;
     margin-top: 10px;
@@ -79,7 +78,6 @@ input[type=text], select, textarea {
 }
 
 .btn:hover {
-    grid-area: btn;
     background-color: #222b2a;
     color: #ffffff;
     margin-top: 10px;

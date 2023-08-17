@@ -1,6 +1,11 @@
 {
    "name_company": "XXX JOINT STOCK COMPANY",
    "name_display": "TABLE QUALITY MONITORING PARAMETER",
+   "dir_readFile": "D:/02_Code/02_Table_Led_BAK/fake_data",
+   "ftp_server": "27.118.28.235",
+   "user": "testftp",
+   "password": "testftp@123",
+   "port": 21,
    "num_tables": 2,
    "infor_table_1": {
       "nameTable": "Water Staion",
@@ -53,7 +58,6 @@
          "mg/m3"
       ]
    },
-   "dir_readFile": "D:/02_Code/02_Table_Led_BAK/fake_data",
    "names_folder_table1": [
       "station_W1",
       "station_W2",

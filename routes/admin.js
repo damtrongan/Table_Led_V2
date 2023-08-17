@@ -2,11 +2,18 @@ const express = require("express");
 const router = express.Router();
 
 const fs = require("fs");
-const { get } = require("https");
 const path = require("path");
-let fileContent = {
+const { config } = require("process");
+let DEFAULTCONFIG = {
   name_company: 'XXX JOINT STOCK COMPANY',
   name_display: 'TABLE QUALITY MONITORING PARAMETER',
+  method_read: 'on',
+  dir_readFile: 'D:/02_Code/02_Table_Led_BAK/fake_data',
+  ftp_server: '27.118.28.235',
+  user: 'testftp',
+  password: 'testftp@123',
+  port: 21,
+  remote_dir: '/An/MocChau',
   num_tables: 2,
   infor_table_1: {
     nameTable: 'Water Staion',
@@ -42,20 +49,15 @@ let fileContent = {
       'mg/m3'
     ]
   },
-  dir_readFile: "D:/02_Code/02_Table_Led_BAK/fake_data",
   names_folder_table1: [ 'station_W1', 'station_W2', 'station_W3' ],
   names_folder_table2: [ 'station_A1', 'station_A2' ]
 }
+
+
 const p = path.join(
   path.dirname(process.mainModule.filename),
   "data",
   "config.json"
-);
-
-const pTest = path.join(
-  path.dirname(process.mainModule.filename),
-  "data",
-  "defaultconfig.json"
 );
 
 function getConfigFromFile(path) {
@@ -73,7 +75,7 @@ async function saveFile(path, data){
     fs.writeFile(path, data ,(err) => {
       if (err) {
         console.log(err);
-      } else resolve(JSON.parse(defaultconfig));
+      } else resolve(JSON.parse(DEFAULTCONFIG));
     });
   });
 }
@@ -87,12 +89,19 @@ router.get("/", async (req, res, next) => {
 
 router.post("/saveconfig", async (req, res, next) => {
   const config = req.body;
+  DEFAULTCONFIG.name_company = config.name_company;
+  DEFAULTCONFIG.name_display = config.name_display;
+  DEFAULTCONFIG.method_read = config.method_read;
+  DEFAULTCONFIG.dir_readFile =  config.dir_readFile;
+  DEFAULTCONFIG.ftp_server = config.ftp_server;
+  DEFAULTCONFIG.user = config.user;
+  DEFAULTCONFIG.password = config.password;
+  DEFAULTCONFIG.port = config.port;
+  DEFAULTCONFIG.remote_dir = config.remote_dir;
+  DEFAULTCONFIG.num_tables = config.num_tables;
+  DEFAULTCONFIG.infor_table_1.nameTable = config.name_table1;
   console.log(config);
-  fileContent.name_company = config.name_company;
-  
-
-  console.log(fileContent.name_company);
-  await saveFile(pTest, JSON.stringify(fileContent));
+  await saveFile(p, JSON.stringify(DEFAULTCONFIG));
   res.redirect("/admin");
 });
 
