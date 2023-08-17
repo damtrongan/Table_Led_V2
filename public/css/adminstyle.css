@@ -2,13 +2,9 @@
     box-sizing: border-box;
 }
 
-/* #admin_input_table {
-    display: block;
-} */
-
 .center {
     margin: auto;
-    width: 50%;
+    width: 100%;
     /* border: 3px solid green; */
     padding: 10px;
     padding: 0px 20px 0px 20px;
@@ -25,7 +21,6 @@
     content: "";
     display: table;
     clear: both;
-
 }
 
 .name_table {
@@ -33,41 +28,15 @@
     text-align: center;
 }
 
-#admin_form {
-    display: block;
-    padding: 0px 20% 0px 20%;
-    
-}
-.detail-info {
-    border: solid green 3px;
-}
-.form-control {
-    margin: 0.2rem 0;
-}
-
-.form-control h3 {
-    text-align: center;
-}
-
-.form-control label,
-.form-control input,
-.form-control textarea {
-    display: block;
+input[type=text], select, textarea {
     width: 100%;
-    margin-bottom: 0.25rem;
-}
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+  }
 
-.form-control input,
-.form-control textarea {
-    border: 1px solid #a1a1a1;
-    font: inherit;
-    border-radius: 2px;
-}
 
-.form-control input:focus,
-.form-control textarea:focus {
-    outline-color: #00695c;
-}
 
 .btn {
     display: block;

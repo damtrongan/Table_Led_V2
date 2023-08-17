@@ -2,112 +2,114 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <title>Config page</title>
-  <link rel="stylesheet" href="/css/adminstyle.css">
+  <link rel="stylesheet" href="/css/adminstyle.css" />
 </head>
 
 <body>
+  <h1 class="name_table center row">Admin input information</h1>
   <div id="admin_input_table">
-    <div class="name_table center row">
-      <h1>Admin input information</h1>
-    </div>
-
     <form id="admin_form" name="admin_form" action="/admin/saveconfig" method="POST">
       <!-- Thông tin chung -->
-      <div class="form-control row">
-        <h3>Information Common</h3>
-        <div class="form-control column">
-          <!--  Tên công ty  -->
-          <label for="name_company">Company name</label>
-          <input type="text" name="name_company" id="name_company" value="<%= config.name_company %>">
-          <!--  Tên màn hình hiển thị  -->
-          <label for="name_display">Table display name</label>
-          <input type="text" name="name_display" id="name_display" value="<%= config.name_display %>">
-          <!--  Số lượng thông số  -->
-          <label for="nums_parameter">Number of Parameter</label>
-          <input type="text" name="nums_parameter" id="nums_parameter" value="-" readonly>
-          <!--  Số lượng bảng  -->
-          <label for="nums_table">Number of tables</label>
-          <input type="text" name="nums_table" id="nums_table" value="<%= config.num_tables %>" readonly>
-          <!--  Vị trí đọc file  -->
-          <label for="dir_readFile">Data directory local</label>
-          <input type="text" name="dir_readFile" id="dir_readFile" value="<%= config.dir_readFile %>">
-        </div>
-        <div class="form-control column">
-
-
-          <!--  Vị trí đọc file  -->
-          <h4>If you are want read file from FTP Server</h4>
-          <label for="FTPSERVER">FTP SERVER Address</label>
-          <input type="text" name="FTPSERVER" id="FTPSERVER" value="">
-          <label for="userName">User name</label>
-          <input type="text" name="userName" id="userName" value="">
-          <label for="password">Password</label>
-          <input type="text" name="password" id="password" value="">
-          <label for="port">Port</label>
-          <input type="text" name="port" id="port" value="">
-        </div>
-
-
-
-
-      </div>
       <div class="detail-info row">
         <div class="form-control column">
-          <h3>Infor Table 1</h3>
+          <h3>Information Common</h3>
+          <span>
+            <!--  Tên công ty  -->
+            <label for="name_company">Company name</label>
+            <input type="text" name="name_company" id="name_company" value="<%= config.name_company %>" />
+          </span>
+
+          <!--  Tên màn hình hiển thị  -->
+          <label for="name_display">Table display name</label>
+          <input type="text" name="name_display" id="name_display" value="<%= config.name_display %>" />
+          <!--  Số lượng thông số  -->
+          <label for="nums_parameter">Number of Parameter</label>
+          <input type="text" name="nums_parameter" id="nums_parameter" value="-" readonly />
+          <!--  Số lượng bảng  -->
+          <label for="nums_table">Number of tables</label>
+          <input type="text" name="nums_table" id="nums_table" value="<%= config.num_tables %>" readonly />
+        </div>
+        <div class="form-control column">
+          <h3>Method Read File</h3>
+          <span>
+            <label for="ReadLocal">Read File From Local</label>
+            <input type="checkbox" name="ReadLocal" id="" />
+            <!--  Vị trí đọc file  -->
+            <label for="dir_readFile">Data directory local</label>
+            <input type="text" name="dir_readFile" id="dir_readFile" value="<%= config.dir_readFile %>" />
+          </span>
+          <span>
+            <label for="ReadFTP">Read File From FTP Server</label>
+            <input type="checkbox" name="ReadFTP" id="" />
+            <label for="FTPSERVER">FTP SERVER Address</label>
+            <input type="text" name="FTPSERVER" id="FTPSERVER" value="<%= config.ftp_server %>" />
+            <label for="userName">User name</label>
+            <input type="text" name="userName" id="userName" value="<%= config.user %>" />
+            <label for="password">Password</label>
+            <input type="text" name="password" id="password" value="<%= config.password %>" />
+            <label for="port">Port</label>
+            <input type="text" name="port" id="port" value="<%= config.port %>" />
+          </span>
+        </div>
+      </div>
+
+      <div class="detail-info row">
+        <!-- Thông tin bảng 1 -->
+        <div class="form-control column">
+          <h3>Information Table 1</h3>
           <!--  Tên bảng 1  -->
           <label for="name_table1">Table 1 name</label>
-          <input type="text" name="name_table1" id="name_table1" value="<%= config.infor_table_1.nameTable %>">
+          <input type="text" name="name_table1" id="name_table1" value="<%= config.infor_table_1.nameTable %>" />
           <!--  Tên folder trạm 1  -->
           <label for="name_folder_1">Folder name Station 1</label>
-          <input type="text" name="name_folder_1" id="name_folder_1" value="<%= config.names_folder_table1[0] %>">
+          <input type="text" name="name_folder_1" id="name_folder_1" value="<%= config.names_folder_table1[0] %>" />
           <!--  Tên folder trạm 2  -->
           <label for="name_folder_2">Folder name Station 2</label>
-          <input type="text" name="name_folder_2" id="name_folder_2" value="<%= config.names_folder_table1[1] %>">
+          <input type="text" name="name_folder_2" id="name_folder_2" value="<%= config.names_folder_table1[1] %>" />
           <!--  Tên folder trạm 3  -->
           <label for="name_folder_3">Folder name Station 3</label>
-          <input type="text" name="name_folder_3" id="name_folder_3" value="<%= config.names_folder_table1[2] %>">
+          <input type="text" name="name_folder_3" id="name_folder_3" value="<%= config.names_folder_table1[2] %>" />
           <!--  Tên Trạm 1  -->
           <label for="name_station_1">Name staion 1</label>
           <input type="text" name="name_station_1" id="name_station_1"
-            value="<%= config.infor_table_1.name_station_1 %>">
+            value="<%= config.infor_table_1.name_station_1 %>" />
           <!--  Tên Trạm 2  -->
           <label for="name_station_2">Name staion 2</label>
           <input type="text" name="name_station_2" id="name_station_2"
-            value="<%= config.infor_table_1.name_station_2 %>">
+            value="<%= config.infor_table_1.name_station_2 %>" />
           <!--  Tên Trạm 3  -->
           <label for="name_station_3">Name staion 3</label>
           <input type="text" name="name_station_3" id="name_station_3"
-            value="<%= config.infor_table_1.name_station_3 %>">
+            value="<%= config.infor_table_1.name_station_3 %>" />
         </div>
-
         <!-- Thông tin bảng 2 -->
         <div class="form-control column">
-          <h3>Infor Table 2</h3>
+          <h3>Information Table 2</h3>
           <!--  Tên bảng 2  -->
           <label for="name_table2">Table 2 name</label>
-          <input type="text" name="name_table2" id="name_table2" value="<%= config.infor_table_2.nameTable %>">
+          <input type="text" name="name_table2" id="name_table2" value="<%= config.infor_table_2.nameTable %>" />
 
           <!--  Tên folder trạm 4  -->
           <label for="name_folder_4">Folder name Station 4</label>
-          <input type="text" name="name_folder_4" id="name_folder_4" value="<%= config.names_folder_table2[0] %>">
+          <input type="text" name="name_folder_4" id="name_folder_4" value="<%= config.names_folder_table2[0] %>" />
 
           <!--  Tên folder trạm 5  -->
           <label for="name_folder_5">Folder name Station 5</label>
-          <input type="text" name="name_folder_5" id="name_folder_5" value="<%= config.names_folder_table2[1] %>">
+          <input type="text" name="name_folder_5" id="name_folder_5" value="<%= config.names_folder_table2[1] %>" />
 
           <!--  Tên Trạm 4  -->
           <label for="name_station_4">Name staion 4</label>
           <input type="text" name="name_station_4" id="name_station_4"
-            value="<%= config.infor_table_2.name_station_1 %>">
+            value="<%= config.infor_table_2.name_station_1 %>" />
 
           <!--  Tên Trạm 5  -->
           <label for="name_station_5">Name staion 5</label>
           <input type="text" name="name_station_5" id="name_station_5"
-            value="<%= config.infor_table_2.name_station_2 %>">
+            value="<%= config.infor_table_2.name_station_2 %>" />
         </div>
       </div>
 
