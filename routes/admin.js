@@ -8,7 +8,7 @@ const path = require("path");
 const p = path.join(
   path.dirname(process.mainModule.filename),
   "data",
-  "defaultconfig.json"
+  "config.json"
 );
 
 function getConfigFromFile(path) {
@@ -25,7 +25,7 @@ async function saveFile(path, data){
   return new Promise((resolve, rejects) => {
     fs.writeFile(path, data ,(err) => {
       if (err) {
-        resolve(JSON.parse("./data/defaultconfig.json"));
+        console.log(err);
       } else resolve(JSON.parse(defaultconfig));
     });
   });

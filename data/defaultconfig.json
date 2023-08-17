@@ -1,1 +1,23 @@
-{"name_company":"XXX JOINT STOCK COMPANY","name_display":"TABLE QUALITY MONITORING PARAMETER","nums_parameter":"-","nums_table":"2","dir_readFile":"D:/02_Code/02_Table_Led_BAK/fake_data","FTPSERVER":"","userName":"","password":"","port":"","name_table1":"Water Station","name_folder_1":"station_W1","name_folder_2":"station_W2","name_folder_3":"station_W3","name_station_1":"Staion 1","name_station_2":"Staion 2","name_station_3":"Staion 3","name_table2":"Air Staion","name_folder_4":"station_A1","name_folder_5":"station_A2","name_station_4":"Staion 4","name_station_5":"Staion 5"}
+{
+   "name_company": "XXX JOINT STOCK COMPANY",
+   "name_display": "TABLE QUALITY MONITORING PARAMETER",
+   "nums_parameter": "-",
+   "nums_table": "2",
+   "dir_readFile": "D:/02_Code/02_Table_Led_BAK/fake_data",
+   "FTPSERVER": "",
+   "userName": "",
+   "password": "",
+   "port": "",
+   "name_table1": "Water Station",
+   "name_folder_1": "station_W1",
+   "name_folder_2": "station_W2",
+   "name_folder_3": "station_W3",
+   "name_station_1": "Staion 1",
+   "name_station_2": "Staion 2",
+   "name_station_3": "Staion 3",
+   "name_table2": "Air Staion",
+   "name_folder_4": "station_A1",
+   "name_folder_5": "station_A2",
+   "name_station_4": "Staion 4",
+   "name_station_5": "Staion 5"
+}
