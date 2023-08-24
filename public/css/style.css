@@ -78,6 +78,11 @@ th {
   max-width: 60px;
 }
 
+td {
+  font-size: 24px;
+  font-weight: bold;
+  color: rgb(253, 51, 95);
+}
 html,
 body,
 .container {

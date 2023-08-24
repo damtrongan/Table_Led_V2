@@ -1,6 +1,7 @@
 "use strict";
 const express = require("express");
 const router = express.Router();
+const si = require('systeminformation');
 
 const configs = require("../data/config.json");
 const { getFTPFileContent } = require("../util/ftp");
@@ -75,5 +76,10 @@ async function renderPage2(req, res, next) {
 
 router.get("/", renderPage1);
 router.get("/table2", renderPage2);
+
+si.graphics((displays) => {
+  console.log(displays);
+})	
+
 
 module.exports = router;

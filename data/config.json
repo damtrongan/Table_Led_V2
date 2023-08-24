@@ -1,6 +1,6 @@
 {
-   "name_company": "XXX JOINT STOCK COMPANY",
-   "name_display": "TABLE QUALITY MONITORING PARAMETER",
+   "name_company": "NHÀ MÁY NHIỆT ĐIỆN UÔNG BÍ",
+   "name_display": "KẾT QUẢ QUAN TRẮC TỰ ĐỘNG LIÊN TỤC",
    "method_read": "on",
    "dir_readFile": "D:/02_Code/02_Table_Led_BAK/fake_data",
    "ftp_server": "27.118.28.235",
@@ -12,17 +12,20 @@
    "infor_table_1": {
       "nameTable": "Water Staion",
       "numb_station": 3,
-      "name_station_1": "Staion 1",
-      "name_station_2": "Staion 2",
-      "name_station_3": "Staion 3",
-      "num_parameter": 7,
+      "name_station_1": "NTSX Tổ máy 300MW",
+      "name_station_2": "NTLM Sông Uông",
+      "name_station_3": "NTLM Sông Sinh",
+      "name_station_4": "NLMĐV Tổ máy 300MW",
+      "name_station_5": "NLMĐV Tổ máy 330MW",
+      "num_parameter": 8,
       "name_parameter": [
          "pH",
          "Temp",
          "TSS",
          "COD",
          "NH4",
-         "Flow_IN",
+         "Flow_IN_1",
+         "Flow_IN_2",
          "Flow_OUT"
       ],
       "unit_parameters": [
